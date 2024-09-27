@@ -7,6 +7,7 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
+  background-color: #ebebeb;
 }
 
 header {
@@ -41,26 +42,28 @@ nav a:hover {
   color: #d12b2b;
 }
 
-.titulo{
+.titulo {
   color: #d12b2b;
 }
+
 #theme-toggle {
   background-color: transparent;
   color: #fff;
   font-size: 1.5rem;
-  /* padding: 0.5rem 1rem; */
   border: none;
   cursor: pointer;
-  /* border-radius: 5px; */
   transition: color 0.3s, ease;
 }
+
 .fas {
-  transition: .2s ea;
+  transition: .2s ease;
 }
-.fa-sun:hover{
+
+.fa-sun:hover {
   color: #ffd104;
 }
-.fa-moon:hover{
+
+.fa-moon:hover {
   color: #b1b1b1;
 }
 
@@ -77,9 +80,8 @@ nav a:hover {
   cursor: pointer;
 }
 
-/* Remover o efeito de hover apenas para o menu-toggle */
 .menu-toggle:hover {
-  background-color: transparent; /* Nenhuma alteração de cor no hover */
+  color: #d12b2b;
 }
 
 #nav-menu {
@@ -100,6 +102,24 @@ main {
   padding: 2rem;
 }
 
+.column {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .column {
+    width: 90%;
+  }
+  .section-curso {
+    flex-wrap: nowrap;
+    flex-basis: 50%;
+  }
+}
+
+section{
+  background-color: #fff;
+}
+
 .section-fetec {
   background-image: url('https://images.pexels.com/photos/218863/pexels-photo-218863.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-size: cover;
@@ -117,32 +137,44 @@ main {
   max-width: 600px;
 }
 
+/* Correção para o layout responsivo e vídeo */
 .section-curso {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  
+}
+
+.section-exposicoes {
   padding: 2rem;
 }
 
 .video-frame {
   flex: 1;
-  height: 400px;
-}
-
-.container {
-  flex: 1;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .video-frame iframe {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* Mantém a proporção 16:9 */
 }
 
+.container {
+  flex: 1;
+  /* padding: 1rem; */
+}
+
+/* Exposição de conteúdo em grid */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+  grid-template-columns: repeat(3, 1fr); /* Exibe 3 itens por linha */
   gap: 2rem;
 }
 
@@ -214,13 +246,21 @@ footer a:hover {
   transition: transform 0.3s ease;
 }
 
-.social-icons a:hover {
-  transform: scale(1.2);
-}
-
 .social-icons i {
   color: #fff;
   font-size: 2rem;
+}
+
+.social-icons i:hover{
+  color: #d12b2b;
+  transition: 0.5s ease;
+  transform: scale(1.2);
+}
+
+@media (max-width: 1024px) {
+  .grid-container {
+      grid-template-columns: repeat(2, 1fr); /* Exibe 2 itens por linha em telas menores */
+  }
 }
 
 /* Responsividade */
@@ -242,6 +282,10 @@ footer a:hover {
     border-radius: 0 0 5px;
   }
 
+  .dark-mode nav ul.show {
+    background-color: #1f1f1f;
+  }
+
   nav ul.show {
     display: block;
   }
@@ -249,34 +293,42 @@ footer a:hover {
   nav li {
     padding: 10px 0;
   }
-  #nav-menu{
+  
+  #nav-menu {
     margin-right: 0;
   }
+
   .menu-toggle {
     display: block;
     transition: .2s ease-in-out;
+    /* background-color: transparent; */
   }
 
   .menu-toggle:hover {
     color: #d12b2b;
+    background-color: transparent;
+  }
+
+  main{
+    padding: 0.5rem;
   }
 
   .section-curso {
     flex-direction: column;
-    display: unset;
   }
 
   .section-fetec {
     min-height: auto;
   }
 
-  .video-frame {
-    height: 500px;
+  .video-frame iframe {
+    height: auto;
+    width: 100%;
   }
 
   .grid-container {
-    grid-template-columns: 1fr;
-  }
+    grid-template-columns: 1fr; /* Exibe 1 item por linha em telas pequenas */
+}
 
   .expo-item img {
     height: 200px;
@@ -288,10 +340,10 @@ footer a:hover {
 }
 
 @media (max-width: 480px) {
-  header {
+  /* header {
     flex-direction: column;
     align-items: flex-start;
-  }
+  } */
 
   header h1 {
     font-size: 1.5rem;
@@ -302,18 +354,31 @@ footer a:hover {
     right: 0;
   }
 
+  /* Estilos Dark Mode para o menu de navegação */
+.dark-mode nav ul {
+  background-color: #1f1f1f; /* Cor de fundo para o menu no Dark Mode */
+}
+
+/* Estilo para o nav ul no mobile no Dark Mode */
+.dark-mode nav ul.show {
+  background-color: #1f1f1f; /* Fundo escuro quando o menu é exibido no mobile */
+}
+
   .section-fetec {
     padding: 1rem;
   }
 
   .section-curso {
-    padding: 1rem 0;
-    display: none;
-
+    padding: 1rem 2rem;
+  }
+  main{
+    padding: 0.5rem;
   }
 
-  .video-frame {
-    height: 100%;
+  .video-frame iframe {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Mantém a proporção 16:9 em telas menores */
   }
 
   footer {
@@ -323,4 +388,69 @@ footer a:hover {
   #theme-toggle {
     font-size: 1.2rem;
   }
+}
+
+
+/* Dark Mode */
+.dark-mode body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode header {
+  background-color: #1f1f1f;
+}
+
+.dark-mode .titulo {
+  color: #ff6b6b; /* Cor destacada no título */
+}
+
+.dark-mode nav a {
+  color: #e0e0e0;
+}
+
+.dark-mode nav a:hover {
+  color: #ff6b6b;
+}
+
+.dark-mode nav ul {
+  color: #1f1f1f;
+}
+.dark-mode #theme-toggle {
+  color: #e0e0e0;
+}
+
+.dark-mode main {
+  background-color: #1f1f1f;
+}
+
+.dark-mode section {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+.dark-mode .expo-item {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.dark-mode button {
+  background-color: transparent;
+}
+
+.dark-mode button:hover {
+  background-color: transparent;
+}
+
+.dark-mode footer {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+.dark-mode .social-icons i {
+  color: #e0e0e0;
+}
+
+.dark-mode .social-icons i:hover {
+  color: #ff6b6b;
 }
